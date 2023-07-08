@@ -7,6 +7,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 200px;
+            background-color: #f5f5f5;
         }
         
         h1 {
@@ -16,14 +17,29 @@
         p {
             font-size: 24px;
             color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        .feedback {
+            font-size: 18px;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
     <h1>Hello Om</h1>
     <p id="current-time"></p>
+    <p class="quote" id="quote-of-the-day"></p>
+    <p class="feedback" id="user-feedback"></p>
 
     <script>
+        // Function to get current time
         function getCurrentTime() {
             var currentTime = new Date();
             var hours = currentTime.getHours();
@@ -39,11 +55,43 @@
             return timeString;
         }
 
+        // Function to get a random quote from an array
+        function getRandomQuote() {
+            var quotes = [
+                "The only way to do great work is to love what you do. - Steve Jobs",
+                "Innovation distinguishes between a leader and a follower. - Steve Jobs",
+                "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
+                "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+                "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt"
+            ];
+
+            var randomIndex = Math.floor(Math.random() * quotes.length);
+            var randomQuote = quotes[randomIndex];
+            return randomQuote;
+        }
+
+        // Function to prompt user for feedback
+        function askFeedback() {
+            var feedback = prompt("How was your day?");
+
+            if (feedback) {
+                var feedbackElement = document.getElementById("user-feedback");
+                feedbackElement.textContent = "Thank you for your feedback: " + feedback;
+            }
+        }
+
         // Update the current time every second
         setInterval(function() {
             var currentTimeElement = document.getElementById("current-time");
             currentTimeElement.textContent = getCurrentTime();
         }, 1000);
+
+        // Get a random quote and display it
+        var quoteElement = document.getElementById("quote-of-the-day");
+        quoteElement.textContent = getRandomQuote();
+
+        // Ask for user feedback after a delay
+        setTimeout(askFeedback, 3000);
     </script>
 </body>
 </html>
